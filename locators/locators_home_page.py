@@ -15,7 +15,7 @@ class HomePageLocators:
 
 
     BUTTON_ORDER_HEADER = (By.XPATH, "//button[@class='Button_Button__ra12g' and text()='Заказать']") # кнопка Заказать в хедере
-    BUTTON_ORDER_MIDDLE = (By.XPATH, "//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']") # кнопка Заказать в хедере
+    BUTTON_ORDER_MIDDLE = (By.XPATH, "//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']") # кнопка Заказать в середине страницы
 
     SCOOTER_LOGO = (By.XPATH, "//a[@href='/']")
     YANDEX_LOGO = (By.XPATH, "//a[@href='//yandex.ru']")
