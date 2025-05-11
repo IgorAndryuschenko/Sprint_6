@@ -95,3 +95,12 @@ class OrderPage(BasePage):
     def click_button_status(self):
         self.click_on_element(OrderPageLocators.BUTTON_STATUS)
 
+    @allure.step("Начать заказ через верхнюю кнопку")
+    def start_order_from_header(self):
+        self.click_bottom_order_header()
+
+    @allure.step("Начать заказ через среднюю кнопку")
+    def start_order_from_middle(self):
+        self.scroll_to_bottom_order_middle()
+        self.click_bottom_order_middle()
+

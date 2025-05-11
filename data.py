@@ -16,18 +16,22 @@ class Data:
 
 class DataScooterOrder:
    test_cases = [
-            ({"name": "Иван",
+            {"name": "Иван",
               "surname": "Иванов",
               "address" : "Джамбульская 2",
               "metro" : "Лубянка",
               "phone": "89991112233",
-              "date":"09.05.2025"
-              }, "header"),
-            ({"name": "Мария",
+              "date":"09.05.2025",
+              "entry_method": "header",
+              "period_locator": "period_1"
+              },
+            {"name": "Мария",
               "surname": "Машкова",
               "address" : "Северная 3г",
               "metro" : "Сокольники",
               "phone": "+79856664455",
-              "date":"10.05.2025"
-              }, "middle")
+              "date":"10.05.2025",
+              "entry_method": "middle",
+              "period_locator": "period_2"
+              }
         ]

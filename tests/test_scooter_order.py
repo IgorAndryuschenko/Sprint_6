@@ -11,29 +11,25 @@ import data
 
 class TestScooterOrder:
     @allure.title("Проверка позитивного сценария заказа самоката")
-    @pytest.mark.parametrize("data, entry_point", data.DataScooterOrder.test_cases)
-    def test_scooter_order(self, driver, data, entry_point):
+    @pytest.mark.parametrize("test_data", data.DataScooterOrder.test_cases)
+    def test_scooter_order(self, driver, test_data):
 
         test_flow = OrderPage(driver)
         # 1. Клик по кнопке
-        if entry_point == "header":
-            test_flow.click_bottom_order_header()
-        else:
-            test_flow.scroll_to_bottom_order_middle()
-            test_flow.click_bottom_order_middle()
+        getattr(test_flow, f"start_order_from_{test_data['entry_method']}")()
 
         # 2. Заполнение формы и клик Далее
         test_flow.fill_data (
-            name=data ["name"], surname=data["surname"], address=data["address"], metro=data["metro"], phone=data["phone"])
+            name=test_data ["name"],
+            surname=test_data["surname"],
+            address=test_data["address"],
+            metro=test_data["metro"],
+            phone=test_data["phone"])
         test_flow.click_button_further()
+
         # 3. Заполнение формы Про аренду и клик Заказать
-        test_flow.input_date(date=data["date"])
-
-        if entry_point == "header":
-            test_flow.input_orger_period_1()
-        else:
-            test_flow.input_orger_period_2()
-
+        test_flow.input_date(date=test_data["date"])
+        getattr(test_flow, f"input_orger_{test_data['period_locator']}")()
         test_flow.click_button_order()
 
         # 4. Проверка подтверждения заказа

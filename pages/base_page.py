@@ -1,11 +1,14 @@
 import allure
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from pages.order_page import *
+from tests.conftest import *
 
 
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
+
 
     @allure.step("Подождать видимости элемента")
     def wait_for_element(self, locator, timeout=10):
