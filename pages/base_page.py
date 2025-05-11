@@ -1,8 +1,7 @@
 import allure
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages.order_page import *
-from tests.conftest import *
+
 
 
 class BasePage:
@@ -34,4 +33,21 @@ class BasePage:
     def get_text_on_element(self, locator, timeout=10):
         element = self.wait_for_element(locator, timeout)
         return element.text
+
+    @allure.step("Дождаться и переключиться на новую вкладку")
+    def switch_to_new_window(self, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            lambda d: len(d.window_handles) > 1
+        )
+        self.driver.switch_to.window(self.driver.window_handles[1])
+
+    @allure.step("Дождаться URL в текущей вкладке")
+    def wait_for_url_contains(self, text, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            lambda d: text in d.current_url
+        )
+
+    @allure.step("Получить текущий URL")
+    def get_current_url(self):
+        return self.driver.current_url
 

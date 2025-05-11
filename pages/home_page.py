@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
+from curl import *
 
 class HomePageScooter(BasePage):
     @allure.step("Кликнуть на элемент аккордиона")
@@ -28,3 +28,15 @@ class HomePageScooter(BasePage):
     @allure.step("Кликнуть на логотип Яндекс")
     def click_yandex_logo(self):
         self.click_on_element(HomePageLocators.YANDEX_LOGO)
+
+    @allure.step("Проверить переход в Дзен через логотип Яндекса")
+    def check_yandex_redirect(self):
+        self.click_yandex_logo()
+        self.switch_to_new_window()
+        self.wait_for_url_contains(site_dzen)
+        assert site_dzen in self.get_current_url()
+
+    @allure.step("Проверить что текущая страница - главная")
+    def is_main_page(self):
+        current_url = self.get_current_url()
+        return current_url.endswith('/') or 'qa-scooter' in current_url
